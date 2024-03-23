@@ -69,6 +69,21 @@ app.get('/uploads', (req, res) => {
   });
 });
 
+app.delete('/uploads/:filename', (req, res) => {
+  const filename = req.params.filename;
+  const filePath = `uploads/${filename}`;
+
+  fs.unlink(filePath, (err) => {
+    if (err) {
+      console.error(`Fehler beim Löschen der Datei ${filePath}: ${err}`);
+      return res.status(500).send('Ein Fehler ist aufgetreten.');
+    }
+
+    res.send(`Foto ${filename} erfolgreich gelöscht.`);
+  });
+});
+
+
 
 
 // Server starten
