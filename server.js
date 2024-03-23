@@ -1,8 +1,10 @@
 const express = require('express');
 const multer = require('multer');
 const fs = require('fs');
+const cors = require('cors');
 
 const app = express();
+app.use(cors());
 const port = 3000;
 
 // Speicherort für die hochgeladenen Fotos
@@ -11,7 +13,7 @@ const storage = multer.diskStorage({
     cb(null, 'uploads/') // Das Verzeichnis 'uploads/' muss existieren
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now())
+    cb(null, file.fieldname + '-' + Date.now()+'.jpeg')
   }
 });
 
